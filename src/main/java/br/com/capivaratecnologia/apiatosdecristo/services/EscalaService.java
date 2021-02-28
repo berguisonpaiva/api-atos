@@ -23,7 +23,7 @@ public class EscalaService {
         escala.setVoluntario(voluntario.get());
         escala.setMinisterio(model.getMinisterio());
         escala.setUser(user.get());
-        
+
        escalaRepository.save(escala);
     }
 }

@@ -2,6 +2,7 @@ package br.com.capivaratecnologia.apiatosdecristo.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @Table(name = "voluntario")
 public class VoluntarioE {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id_voluntario")
     private Long id;
     @Column(name = "nome")
