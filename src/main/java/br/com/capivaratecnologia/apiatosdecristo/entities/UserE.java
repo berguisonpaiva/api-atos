@@ -2,7 +2,6 @@ package br.com.capivaratecnologia.apiatosdecristo.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -13,8 +12,7 @@ import javax.persistence.*;
 public class UserE {
 
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long id;
     @Column(name = "nome")

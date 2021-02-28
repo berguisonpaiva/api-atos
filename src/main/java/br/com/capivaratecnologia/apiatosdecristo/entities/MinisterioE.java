@@ -2,7 +2,6 @@ package br.com.capivaratecnologia.apiatosdecristo.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,8 +12,8 @@ import java.util.List;
 @Table(name = "ministerio")
 public class MinisterioE {
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ministerio")
     private Long id;
     @Column(name = "nome")
     private String nome;
