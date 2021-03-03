@@ -1,6 +1,5 @@
 package br.com.capivaratecnologia.apiatosdecristo.web.ministerio;
 
-import br.com.capivaratecnologia.apiatosdecristo.entities.MinisterioE;
 import br.com.capivaratecnologia.apiatosdecristo.services.MinisterioService;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinVolunInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinisterioInputModel;
@@ -11,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,10 +24,15 @@ public class MinisterioController {
         final var ministerio = service.findALL();
         return ministerio.stream().map(MinisterioResponse::entityToResponse).collect(Collectors.toList());
 }
-    @GetMapping(value = "/{userId}")
+    @GetMapping(value = "/user/{userId}")
     List<MinisterioResponse> findmy(@PathVariable("userId")Long userId){
-        final var menus = service.findMyVoluntarios(userId);
-        return menus.stream().map(MinisterioResponse::entityToResponse).collect(Collectors.toList());
+        final var ministerio = service.findMyVoluntarios(userId);
+        return ministerio.stream().map(MinisterioResponse::entityToResponse).collect(Collectors.toList());
+    }
+    @GetMapping(value = "/min/{id}")
+    List<MinisterioResponse> findByid(@PathVariable("id")Long id ){
+        final var ministerio = service.findByid(id);
+        return  ministerio.stream().map(MinisterioResponse::entityToResponse).collect(Collectors.toList());
     }
     @PostMapping(value = "/")
     public void save(@RequestBody MinisterioRequest request){

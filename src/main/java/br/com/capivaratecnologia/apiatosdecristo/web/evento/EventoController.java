@@ -23,7 +23,9 @@ public class EventoController {
         final var input = new EventoInputModel(
                 request.getTitulo(),
                 request.getData(),
-                request.getHora()
+                request.getHora(),
+                request.getImg(),
+                request.getStatus()
         );
         service.save(input);
     }
@@ -33,7 +35,11 @@ public class EventoController {
         final var eveto = service.findALL();
         return eveto.stream().map(EventoResponse::entityToResponse).collect(Collectors.toList());
     }
-
+    @GetMapping(value = "/ativo")
+    List<EventoResponse> findallStatus(){
+        final var eveto = service.findALLStatus();
+        return eveto.stream().map(EventoResponse::entityToResponse).collect(Collectors.toList());
+    }
     @GetMapping(value = "/{id}")
     EventoResponse findByid(@PathVariable(value = "id") Long id){
         final var eveto = service.findById(id);

@@ -11,7 +11,12 @@ import javax.persistence.*;
 @Table(name = "evento")
 public class EventoE {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "evento_sequence",
+            sequenceName = "evento_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_evento")
     private Long id;
     @Column(name = "titulo")
@@ -20,4 +25,8 @@ public class EventoE {
     private String data;
     @Column(name = "hora_evento")
     private String hora;
+    @Column(name = "image_evento")
+    private String img;
+    @Column(name = "status_evento")
+    private String status;
 }

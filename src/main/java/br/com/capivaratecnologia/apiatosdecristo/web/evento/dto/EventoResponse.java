@@ -9,6 +9,8 @@ public class EventoResponse {
     private String titulo;
     private String data;
     private String hora;
+    private String img;
+    private String status;
 
     public static EventoResponse entityToResponse(EventoE eventoE){
         final var resp = new EventoResponse();
@@ -16,6 +18,9 @@ public class EventoResponse {
         resp.setTitulo(eventoE.getTitulo());
         resp.setData(eventoE.getData());
         resp.setHora(eventoE.getHora());
+        resp.setImg(eventoE.getImg());
+        resp.setStatus(eventoE.getStatus());
+
         return resp;
     }
 }

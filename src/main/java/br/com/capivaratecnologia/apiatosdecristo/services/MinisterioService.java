@@ -3,15 +3,12 @@ package br.com.capivaratecnologia.apiatosdecristo.services;
 
 import br.com.capivaratecnologia.apiatosdecristo.entities.MinVolunE;
 import br.com.capivaratecnologia.apiatosdecristo.entities.MinisterioE;
-import br.com.capivaratecnologia.apiatosdecristo.exeception.RegraNegocioException;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.MinVolunRepository;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.MinisterioRepository;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.VoluntarioRepository;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinVolunInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinisterioInputModel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +24,9 @@ public class MinisterioService {
     public List<MinisterioE> findALL(){
         return repository.findAll();
     }
-
+    public Optional<MinisterioE> findByid(Long id){
+        return repository.findById(id);
+    }
     public  List<MinisterioE> findMyVoluntarios(Long userId){
         return  repository.findByUserId(userId);
     }

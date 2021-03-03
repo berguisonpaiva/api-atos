@@ -25,6 +25,9 @@ public class EventoService {
     public List<EventoE> findALL(){
         return eventoRepository.findAll();
     }
+    public List<EventoE> findALLStatus(){
+        return eventoRepository.findByStatus("ativo");
+    }
 
     public Optional<EventoE> findById(Long id){
         return eventoRepository.findById(id);

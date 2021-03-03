@@ -11,7 +11,12 @@ import javax.persistence.*;
 @Table(name = "ministerio_voluntario")
 public class MinVolunE {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "ministerio_voluntario_sequence",
+            sequenceName = "ministerio_voluntario_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
     @ManyToOne
