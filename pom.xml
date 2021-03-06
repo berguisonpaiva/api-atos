@@ -14,7 +14,7 @@
 	<name>api-atos-de-cristo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>11</java.version>
 
 	</properties>
 	<dependencies>
@@ -66,11 +66,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>com.heroku.sdk</groupId>
-				<artifactId>heroku-maven-plugin</artifactId>
-				<version>2.0.8</version>
-			</plugin>
+
 			<plugin>
 
 				<groupId>org.springframework.boot</groupId>
