@@ -12,12 +12,7 @@ import java.util.List;
 @Table(name = "ministerio")
 public class MinisterioE {
     @Id
-    @SequenceGenerator(
-            name = "ministerio_sequence",
-            sequenceName = "ministerio_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_ministerio")
     private Long id;
     @Column(name = "nome")

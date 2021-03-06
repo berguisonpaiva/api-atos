@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class VoluntarioRequet {
+    private Long id;
     private String nome;
     private String contato;
 }

@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface EscalaRepository extends JpaRepository<EscalaE,Long> {
     List<EscalaE> findByEventoId(Long eventoId);
+    Optional<EscalaE> findByEventoIdAndVoluntarioId(Long eventoId, Long volunrioId);
 }

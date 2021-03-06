@@ -11,12 +11,7 @@ import javax.persistence.*;
 @Table(name = "evento")
 public class EventoE {
     @Id
-    @SequenceGenerator(
-            name = "evento_sequence",
-            sequenceName = "evento_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_evento")
     private Long id;
     @Column(name = "titulo")

@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class EventoInputModel {
+    private Long id;
     private String titulo;
     private String data;
     private String hora;

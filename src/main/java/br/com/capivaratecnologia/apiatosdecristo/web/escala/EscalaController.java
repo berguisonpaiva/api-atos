@@ -1,16 +1,17 @@
 package br.com.capivaratecnologia.apiatosdecristo.web.escala;
 
-import br.com.capivaratecnologia.apiatosdecristo.entities.EscalaE;
+import br.com.capivaratecnologia.apiatosdecristo.entities.VoluntarioE;
+import br.com.capivaratecnologia.apiatosdecristo.exeception.ResourceNotFoudException;
 import br.com.capivaratecnologia.apiatosdecristo.services.EscalaService;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.EscalaInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.web.escala.dto.EscalaRequest;
 import br.com.capivaratecnologia.apiatosdecristo.web.escala.dto.EscalaResponse;
-import br.com.capivaratecnologia.apiatosdecristo.web.evento.dto.EventoResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,19 +20,64 @@ import java.util.stream.Collectors;
 public class EscalaController {
     private final EscalaService service;
 
+
     @PostMapping(value = "/")
-    public void save(@RequestBody EscalaRequest request){
+    public ResponseEntity save(@RequestBody EscalaRequest request){
+      final var resut = service.findByEventoByvoluntario(request.getEvento(), request.getVoluntario());
         final  var escala = new EscalaInputModel(
+                request.getId(),
                 request.getEvento(),
                 request.getVoluntario(),
                 request.getMinisterio(),
                 request.getUser()
         );
-        service.save(escala);
+
+        if(resut.isEmpty()){
+            service.save(escala);
+        return ResponseEntity.ok("Salvo com sucesso");}
+         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
     }
+
+    @PutMapping (value = "/")
+    public ResponseEntity update(@RequestBody EscalaRequest request){
+        final var resut = service.findById(request.getId());
+        final  var escala = new EscalaInputModel(
+                request.getId(),
+                request.getEvento(),
+                request.getVoluntario(),
+                request.getMinisterio(),
+                request.getUser()
+        );
+
+        if(resut.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+           }
+        service.update(escala);
+        return ResponseEntity.ok("Atualizado com sucesso");
+
+
+    }
+
     @GetMapping(value = "/{eventoId}")
-    List<EscalaResponse> escala(@PathVariable("eventoId")Long eventoId){
+    public ResponseEntity escala(@PathVariable("eventoId")Long eventoId){
         final var escala = service.findEvento(eventoId);
-        return escala.stream().map(EscalaResponse::entityToResponse).collect(Collectors.toList());
+
+        if(escala.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(escala.stream().map(EscalaResponse::entityToResponse).collect(Collectors.toList()));
     }
+
+    @DeleteMapping(value = "/{escalaId}")
+    public ResponseEntity delete(@PathVariable("escalaId")Long escalaId){
+        final var escala = service.findById(escalaId);
+
+        if(escala.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        service.delete(escalaId);
+        return ResponseEntity.ok("Deletado com sucesso");
+    }
+
 }

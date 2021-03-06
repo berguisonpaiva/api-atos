@@ -7,11 +7,14 @@ import lombok.Data;
 
 @Data
 public class EscalaResponse {
+    private Long id;
     private String ministerio;
     private String  voluntario;
 
+
     public static EscalaResponse entityToResponse(EscalaE escalaE){
         final var resp = new EscalaResponse();
+        resp.setId(escalaE.getId());
        resp.setMinisterio(escalaE.getMinisterio());
         resp.setVoluntario(escalaE.getVoluntario().getNome());
 

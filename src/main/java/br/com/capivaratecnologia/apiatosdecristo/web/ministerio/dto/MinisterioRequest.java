@@ -4,5 +4,7 @@ import lombok.Data;
 
 @Data
 public class MinisterioRequest {
+    private Long id;
     private String nome;
+    private Long user;
 }

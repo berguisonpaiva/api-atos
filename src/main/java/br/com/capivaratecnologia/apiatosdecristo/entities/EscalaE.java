@@ -11,12 +11,7 @@ import javax.persistence.*;
 @Table(name = "escala")
 public class EscalaE {
     @Id
-    @SequenceGenerator(
-            name = "escala_sequence",
-            sequenceName = "escala_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_escala")
     private Long id;
     @Column(name = "ministerio")

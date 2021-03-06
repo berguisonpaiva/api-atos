@@ -12,12 +12,7 @@ import javax.persistence.*;
 public class UserE {
 
     @Id
-    @SequenceGenerator(
-            name = "usuario_sequence",
-            sequenceName = "usuario_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_usuario")
     private Long id;
     @Column(name = "nome")
@@ -26,6 +21,8 @@ public class UserE {
     private String email;
     @Column(name = "senha")
     private String password;
+    @Column(name = "role")
+    private String role;
 
 
 }

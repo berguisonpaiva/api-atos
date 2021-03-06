@@ -1,34 +1,99 @@
 package br.com.capivaratecnologia.apiatosdecristo.services;
 
 import br.com.capivaratecnologia.apiatosdecristo.entities.UserE;
+import br.com.capivaratecnologia.apiatosdecristo.exeception.SenhaInvalidaException;
 import br.com.capivaratecnologia.apiatosdecristo.exeception.UserNotFoundException;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.UserRepository;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.UserRegisterInputModel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserE login(String email, String password) throws UserNotFoundException{
+    public Optional<UserE> login(String email, String password) throws UserNotFoundException{
         final var useropt = repository.findByEmail(email);
-        final var user =useropt.orElseThrow(()->new UserNotFoundException());
-        final var isUserValid = new BCryptPasswordEncoder().matches(password,user.getPassword());
-        if(!isUserValid){}
-        return user;
+        boolean senhasBatem = passwordEncoder.matches( password, useropt.get().getPassword() );
+
+        if(senhasBatem){
+            return useropt;
+        }
+
+        throw new SenhaInvalidaException();
     }
 
     public  void register(UserRegisterInputModel model){
-        final var password = new BCryptPasswordEncoder().encode(model.getPassword());
+        final var password = passwordEncoder.encode(model.getPassword());
         final var user = new UserE();
         user.setEmail(model.getEmail());
         user.setName(model.getName());
         user.setPassword(password);
+        user.setRole("User");
 
         repository.save(user);
     }
 
+    public  void update(UserRegisterInputModel model){
+        final var password = passwordEncoder.encode(model.getPassword());
+        final var userResp = repository.findById(model.getId());
+        final var user = new UserE();
+        user.setId(model.getId());
+
+        if(model.getName()==""||model.getName()==null){
+            user.setName(userResp.get().getName());
+        }else {
+            user.setName(model.getName());
+        }
+        if(model.getEmail()==""||model.getEmail()==null){
+            user.setEmail(userResp.get().getEmail());
+        }else {
+            user.setEmail(model.getEmail());
+        }
+        if(model.getPassword()==""||model.getPassword()==null){
+            user.setPassword(userResp.get().getPassword());
+        }else {
+            user.setPassword(password);
+        }
+        if(model.getRole()==""||model.getRole()==null){
+            user.setRole(userResp.get().getRole());
+        }else {
+            user.setRole(model.getRole());
+        }
+
+
+
+
+
+        repository.save(user);
+    }
+
+
+    public Optional<UserE> findByEmail(String email){
+        return  repository.findByEmail(email);
+
+    }
+    public Optional<UserE> findById(Long id){
+        return  repository.findById(id);
+
+    }
+    public List<UserE> findAll(){
+        return  repository.findAll();
+
+    }
+
+    public  void deliteUser(Long  id_user){
+
+        repository.deleteById(id_user);
+
+    }
+
 }
+
