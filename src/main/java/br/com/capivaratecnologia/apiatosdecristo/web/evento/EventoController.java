@@ -7,6 +7,7 @@ import br.com.capivaratecnologia.apiatosdecristo.web.evento.dto.EventoResponse;
 import br.com.capivaratecnologia.apiatosdecristo.web.ministerio.dto.MinisterioResponse;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = "/evento")
 public class EventoController {
-    private final EventoService service;
+    @Autowired
+    private  EventoService service;
 
     @PostMapping(value = "/")
     public ResponseEntity save(@RequestBody EventoRequest request) {

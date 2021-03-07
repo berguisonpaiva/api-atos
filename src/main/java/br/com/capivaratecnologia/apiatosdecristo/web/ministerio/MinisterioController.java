@@ -9,6 +9,7 @@ import br.com.capivaratecnologia.apiatosdecristo.web.ministerio.dto.MinVolunRequ
 import br.com.capivaratecnologia.apiatosdecristo.web.ministerio.dto.MinisterioRequest;
 import br.com.capivaratecnologia.apiatosdecristo.web.ministerio.dto.MinisterioResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ministerio")
-@RequiredArgsConstructor
 public class MinisterioController {
-    private final MinisterioService service;
-    private final VoluntarioService voluntarioService;
+    @Autowired
+    private  MinisterioService service;
+    @Autowired
+    private  VoluntarioService voluntarioService;
 
     //Listar todos
     @GetMapping(value = "/")

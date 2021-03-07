@@ -10,18 +10,23 @@ import br.com.capivaratecnologia.apiatosdecristo.repositoris.VoluntarioRepositor
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinVolunInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinisterioInputModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+
 public class MinisterioService {
-    private final MinisterioRepository repository;
-    private final VoluntarioRepository voluntarioRepository;
-    private final MinVolunRepository minVolunRepository;
-    private final UserRepository userRepository;
+    @Autowired
+    private MinisterioRepository repository;
+    @Autowired
+    private VoluntarioRepository voluntarioRepository;
+    @Autowired
+    private MinVolunRepository minVolunRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public List<MinisterioE> findALL() {
         return repository.findAll();

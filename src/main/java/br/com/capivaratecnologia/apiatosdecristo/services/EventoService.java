@@ -4,15 +4,16 @@ import br.com.capivaratecnologia.apiatosdecristo.entities.EventoE;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.EventoRepository;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.EventoInputModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class EventoService {
-    private final EventoRepository eventoRepository;
+    @Autowired
+    private  EventoRepository eventoRepository;
 
     public void save(EventoInputModel model) {
         final var evento = new EventoE();

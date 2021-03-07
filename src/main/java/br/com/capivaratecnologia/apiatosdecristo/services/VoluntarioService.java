@@ -8,6 +8,7 @@ import br.com.capivaratecnologia.apiatosdecristo.viewModels.UserRegisterInputMod
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.VoluntarioInputModel;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class VoluntarioService {
-    private final VoluntarioRepository repository;
+    @Autowired
+    private  VoluntarioRepository repository;
 
     public void save(VoluntarioInputModel model) {
         final var voluntario = new VoluntarioE();

@@ -6,6 +6,7 @@ import br.com.capivaratecnologia.apiatosdecristo.exeception.UserNotFoundExceptio
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.UserRepository;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.UserRegisterInputModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+
 public class UserService {
-    private final UserRepository repository;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private  UserRepository repository;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
 
     public Optional<UserE> login(String email, String password) throws UserNotFoundException{
         final var useropt = repository.findByEmail(email);

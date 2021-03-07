@@ -16,6 +16,7 @@ public class UsuarioSeviceImpl implements UserDetailsService {
 
     @Autowired
     private  PasswordEncoder encoder;
+    @Autowired
     private  UserRepository repository;
 
     @Override

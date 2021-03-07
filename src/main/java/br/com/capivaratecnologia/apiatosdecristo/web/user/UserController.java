@@ -9,6 +9,7 @@ import br.com.capivaratecnologia.apiatosdecristo.web.user.dto.LoginRequest;
 import br.com.capivaratecnologia.apiatosdecristo.web.user.dto.LoginResponse;
 import br.com.capivaratecnologia.apiatosdecristo.web.user.dto.RegisterUserRequet;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/user")
-@RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+    @Autowired
+    private  UserService userService;
 
     //login
     @PostMapping(value = "/auth")

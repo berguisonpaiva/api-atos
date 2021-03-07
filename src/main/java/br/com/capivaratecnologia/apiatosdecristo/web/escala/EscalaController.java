@@ -7,6 +7,7 @@ import br.com.capivaratecnologia.apiatosdecristo.viewModels.EscalaInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.web.escala.dto.EscalaRequest;
 import br.com.capivaratecnologia.apiatosdecristo.web.escala.dto.EscalaResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequiredArgsConstructor
+
 @RequestMapping(value = "/escala")
 public class EscalaController {
-    private final EscalaService service;
+    @Autowired
+    private  EscalaService service;
 
 
     @PostMapping(value = "/")

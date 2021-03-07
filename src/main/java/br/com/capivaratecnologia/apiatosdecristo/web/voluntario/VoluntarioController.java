@@ -6,6 +6,7 @@ import br.com.capivaratecnologia.apiatosdecristo.viewModels.VoluntarioInputModel
 import br.com.capivaratecnologia.apiatosdecristo.web.voluntario.dto.VoluntarioRequet;
 import br.com.capivaratecnologia.apiatosdecristo.web.voluntario.dto.VoluntarioResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequiredArgsConstructor
+
 @RequestMapping(value = "/voluntario")
 public class VoluntarioController {
-    private final VoluntarioService service;
+    @Autowired
+    private  VoluntarioService service;
 
 
 

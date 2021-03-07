@@ -4,18 +4,22 @@ import br.com.capivaratecnologia.apiatosdecristo.entities.EscalaE;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.*;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.EscalaInputModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class EscalaService {
-    private final EscalaRepository escalaRepository;
-    private final VoluntarioRepository voluntarioRepository;
-    private final EventoRepository eventoRepository;
-    private final UserRepository userRepository;
+    @Autowired
+    private  EscalaRepository escalaRepository;
+    @Autowired
+    private  VoluntarioRepository voluntarioRepository;
+    @Autowired
+    private  EventoRepository eventoRepository;
+    @Autowired
+    private  UserRepository userRepository;
 
     public void save(EscalaInputModel model) {
         final var escala = new EscalaE();
