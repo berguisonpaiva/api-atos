@@ -2,12 +2,14 @@ package br.com.capivaratecnologia.apiatosdecristo.web.user;
 
 import br.com.capivaratecnologia.apiatosdecristo.entities.UserE;
 import br.com.capivaratecnologia.apiatosdecristo.exeception.UserNotFoundException;
+import br.com.capivaratecnologia.apiatosdecristo.security.jwt.JwtService;
 import br.com.capivaratecnologia.apiatosdecristo.services.UserService;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.UserRegisterInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.web.ministerio.dto.MinisterioResponse;
 import br.com.capivaratecnologia.apiatosdecristo.web.user.dto.LoginRequest;
 import br.com.capivaratecnologia.apiatosdecristo.web.user.dto.LoginResponse;
 import br.com.capivaratecnologia.apiatosdecristo.web.user.dto.RegisterUserRequet;
+import br.com.capivaratecnologia.apiatosdecristo.web.user.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 public class UserController {
     @Autowired
     private  UserService userService;
+    @Autowired
+    private  JwtService jwtService;
 
     //login
     @PostMapping(value = "/auth")
@@ -30,7 +34,8 @@ public class UserController {
 
         try {
             final var user = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
-            return ResponseEntity.ok(LoginResponse.entityToResponse(user.get()));
+            String token = jwtService.gerarToken(user.get());
+            return ResponseEntity.ok(LoginResponse.entityToResponse(user.get(),token));
         } catch (UserNotFoundException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
@@ -102,15 +107,15 @@ public class UserController {
 
     //listar ById
     @GetMapping(value = "/{id}")
-    List<LoginResponse> findByid(@PathVariable("id") Long id) {
+    List<UserResponse> findByid(@PathVariable("id") Long id) {
         final var user = userService.findById(id);
-        return user.stream().map(LoginResponse::entityToResponse).collect(Collectors.toList());
+        return user.stream().map(UserResponse::entityToResponse).collect(Collectors.toList());
     }
 
     //listar Todos
     @GetMapping(value = "/")
-    List<LoginResponse> findALL() {
+    List<UserResponse> findALL() {
         final var user = userService.findAll();
-        return user.stream().map(LoginResponse::entityToResponse).collect(Collectors.toList());
+        return user.stream().map(UserResponse::entityToResponse).collect(Collectors.toList());
     }
 }
