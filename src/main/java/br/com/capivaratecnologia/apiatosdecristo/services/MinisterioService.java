@@ -65,7 +65,7 @@ public class MinisterioService {
     public void update(MinisterioInputModel model) {
         final var ministerio = new MinisterioE();
         final var resp = repository.findById(model.getId());
-        final var user = userRepository.findById(model.getUser());
+
         ministerio.setId(model.getId());
         if (model.getNome() == null || model.getNome() == "") {
             ministerio.setNome(resp.get().getNome());
@@ -74,9 +74,12 @@ public class MinisterioService {
         }
         if (model.getId() == null) {
             ministerio.setUser(resp.get().getUser());
-        } else if (user.isEmpty()) {
-            ministerio.setUser(null);
+        } else if (model.getUser() == null) {
+            ministerio.setUser(resp.get().getUser());
+
         } else {
+            final var user = userRepository.findById(model.getUser());
+
             ministerio.setUser(user.get());
         }
         repository.save(ministerio);
