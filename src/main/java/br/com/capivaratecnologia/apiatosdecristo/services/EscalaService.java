@@ -26,7 +26,11 @@ public class EscalaService {
         final var evento = eventoRepository.findById(model.getEvento());
         final var voluntario = voluntarioRepository.findById(model.getVoluntario());
         final var user = userRepository.findById(model.getUser());
+        System.out.println(evento);
+        System.out.println(voluntario);
+        System.out.println(user);
         escala.setEvento(evento.get());
+
         escala.setVoluntario(voluntario.get());
         escala.setMinisterio(model.getMinisterio());
         escala.setUser(user.get());
