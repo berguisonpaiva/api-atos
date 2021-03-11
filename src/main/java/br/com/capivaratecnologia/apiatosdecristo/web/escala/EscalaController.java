@@ -70,6 +70,15 @@ public class EscalaController {
         }
         return ResponseEntity.ok(escala.stream().map(EscalaResponse::entityToResponse).collect(Collectors.toList()));
     }
+    @GetMapping(value = "/")
+    public ResponseEntity findall(){
+        final var escala = service.findALL();
+
+        if(escala.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(escala.stream().map(EscalaResponse::entityToResponse).collect(Collectors.toList()));
+    }
 
     @DeleteMapping(value = "/{escalaId}")
     public ResponseEntity delete(@PathVariable("escalaId")Long escalaId){

@@ -5,6 +5,7 @@ import br.com.capivaratecnologia.apiatosdecristo.repositoris.*;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.EscalaInputModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -78,7 +79,7 @@ public class EscalaService {
     }
 
     public List<EscalaE> findALL() {
-        return escalaRepository.findAll();
+        return escalaRepository.findAll(Sort.by("evento"));
     }
 
     public Optional<EscalaE> findByEventoByvoluntario(Long eventoId, Long voluntarioId) {
@@ -86,7 +87,7 @@ public class EscalaService {
     }
 
     public List<EscalaE> findEvento(Long eventoId) {
-        return escalaRepository.findByEventoId(eventoId);
+        return escalaRepository.findByEventoId(Sort.by("ministerio"),eventoId);
     }
 
     public void delete(Long id) {

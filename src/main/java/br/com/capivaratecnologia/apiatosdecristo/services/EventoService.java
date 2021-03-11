@@ -5,6 +5,7 @@ import br.com.capivaratecnologia.apiatosdecristo.repositoris.EventoRepository;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.EventoInputModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,11 +61,11 @@ public class EventoService {
     }
 
     public List<EventoE> findALL() {
-        return eventoRepository.findAll();
+        return eventoRepository.findAll(Sort.by("data"));
     }
 
     public List<EventoE> findALLStatus() {
-        return eventoRepository.findByStatus("ATIVO");
+        return eventoRepository.findByStatus(Sort.by("data"),"ATIVO");
     }
 
     public Optional<EventoE> findById(Long id) {

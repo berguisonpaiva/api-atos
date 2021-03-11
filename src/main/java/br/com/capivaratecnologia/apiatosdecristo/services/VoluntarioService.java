@@ -9,6 +9,7 @@ import br.com.capivaratecnologia.apiatosdecristo.viewModels.VoluntarioInputModel
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,7 @@ public class VoluntarioService {
     }
 
     public List<VoluntarioE> findALL() {
-        return repository.findAll();
+        return repository.findAll(Sort.by("nome"));
     }
 
     public Optional<VoluntarioE> findById(Long id) {

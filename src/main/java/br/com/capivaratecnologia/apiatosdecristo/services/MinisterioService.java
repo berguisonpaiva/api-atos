@@ -11,6 +11,7 @@ import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinVolunInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinisterioInputModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class MinisterioService {
     private UserRepository userRepository;
 
     public List<MinisterioE> findALL() {
-        return repository.findAll();
+        return repository.findAll(Sort.by("nome"));
     }
 
     public Optional<MinisterioE> findByid(Long id) {
