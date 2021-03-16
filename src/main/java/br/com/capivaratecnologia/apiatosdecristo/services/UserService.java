@@ -40,7 +40,7 @@ public class UserService {
         user.setEmail(model.getEmail());
         user.setName(model.getName());
         user.setPassword(password);
-        user.setRole("User");
+        user.setRole(model.getRole());
 
         repository.save(user);
     }

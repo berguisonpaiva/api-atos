@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class UserController {
 
     //login
     @PostMapping(value = "/auth")
-    public ResponseEntity login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity login(@Valid @RequestBody LoginRequest loginRequest) {
 
         try {
             final var user = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
@@ -44,7 +45,8 @@ public class UserController {
 
     //Salvar
     @PostMapping(value = "/")
-    public ResponseEntity resgiter(@RequestBody RegisterUserRequet requet) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity resgiter(@Valid @RequestBody RegisterUserRequet requet) {
         final var user = userService.findByEmail(requet.getEmail());
         final var inputModel = new UserRegisterInputModel(
                 requet.getId(),
@@ -65,7 +67,7 @@ public class UserController {
 
     //Atualizar
     @PutMapping(value = "/")
-    public ResponseEntity updateUser(@RequestBody RegisterUserRequet requet) {
+    public ResponseEntity updateUser(@Valid @RequestBody RegisterUserRequet requet) {
         final var user = userService.findById(requet.getId());
         final var userEmail = userService.findByEmail(requet.getEmail());
 

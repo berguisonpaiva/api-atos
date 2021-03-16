@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Getter
@@ -15,8 +17,11 @@ public class UserE {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_usuario")
     private Long id;
+    @NotBlank
     @Column(name = "nome")
     private String name;
+    @NotBlank
+    @Email
     @Column(name = "email")
     private String email;
     @Column(name = "senha")

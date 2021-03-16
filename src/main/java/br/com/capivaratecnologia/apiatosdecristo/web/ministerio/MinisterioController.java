@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,7 +56,7 @@ public class MinisterioController {
 
     // Adicionar Ministerio
     @PostMapping(value = "/")
-    public ResponseEntity save(@RequestBody MinisterioRequest request) {
+    public ResponseEntity save(@Valid  @RequestBody MinisterioRequest request) {
         final var resp = service.findByNome(request.getNome());
         final var input = new MinisterioInputModel(
                 request.getId(),
@@ -72,7 +73,7 @@ public class MinisterioController {
 
     // Atualizae Ministerio
     @PutMapping(value = "/")
-    public ResponseEntity update(@RequestBody MinisterioRequest request) {
+    public ResponseEntity update(@Valid @RequestBody MinisterioRequest request) {
         final var resp = service.findByid(request.getId());
         final var input = new MinisterioInputModel(
                 request.getId(),
