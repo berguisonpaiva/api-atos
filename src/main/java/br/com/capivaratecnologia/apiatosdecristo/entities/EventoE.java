@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,4 +25,6 @@ public class EventoE {
     private String img;
     @Column(name = "status_evento")
     private String status;
+    @ManyToMany( cascade = CascadeType.ALL,mappedBy = "evento")
+    private List<EscalaE> escala;
 }
