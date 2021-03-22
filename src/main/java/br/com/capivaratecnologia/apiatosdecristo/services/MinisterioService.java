@@ -9,7 +9,6 @@ import br.com.capivaratecnologia.apiatosdecristo.repositoris.UserRepository;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.VoluntarioRepository;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinVolunInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.MinisterioInputModel;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,8 @@ public class MinisterioService {
         return repository.findByUserId(userId);
     }
 
-    public Optional<MinVolunE> findVoluntarios(Long userId) {
-        return minVolunRepository.findByVoluntarioId(userId);
+    public Optional<MinVolunE> findVoluntarios(Long volu) {
+        return minVolunRepository.findByVoluntarioId(volu);
     }
 
     public Optional<MinisterioE> findByNome(String nome) {

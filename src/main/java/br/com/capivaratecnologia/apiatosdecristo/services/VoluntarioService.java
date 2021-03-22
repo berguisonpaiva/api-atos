@@ -1,8 +1,8 @@
 package br.com.capivaratecnologia.apiatosdecristo.services;
 
-import br.com.capivaratecnologia.apiatosdecristo.entities.MinisterioE;
-import br.com.capivaratecnologia.apiatosdecristo.entities.UserE;
-import br.com.capivaratecnologia.apiatosdecristo.entities.VoluntarioE;
+import br.com.capivaratecnologia.apiatosdecristo.entities.*;
+import br.com.capivaratecnologia.apiatosdecristo.repositoris.EscalaRepository;
+import br.com.capivaratecnologia.apiatosdecristo.repositoris.MinVolunRepository;
 import br.com.capivaratecnologia.apiatosdecristo.repositoris.VoluntarioRepository;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.UserRegisterInputModel;
 import br.com.capivaratecnologia.apiatosdecristo.viewModels.VoluntarioInputModel;
@@ -21,6 +21,11 @@ import java.util.Optional;
 public class VoluntarioService {
     @Autowired
     private  VoluntarioRepository repository;
+    @Autowired
+    private MinVolunRepository  minVolunRepository;
+    @Autowired
+    private EscalaRepository escalaRepository;
+
 
     public void save(VoluntarioInputModel model) {
         final var voluntario = new VoluntarioE();
@@ -51,6 +56,7 @@ public class VoluntarioService {
     }
 
     public void delete(Long id){
+
         repository.deleteById(id);
     }
 

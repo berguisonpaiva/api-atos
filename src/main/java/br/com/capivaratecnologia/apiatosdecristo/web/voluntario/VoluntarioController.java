@@ -78,7 +78,7 @@ public class VoluntarioController {
     }
 
     //Deletar Volutario
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/volu/{id}")
     public ResponseEntity delete(@PathVariable(value = "id") Long id) {
         final var volu = service.findById(id);
 

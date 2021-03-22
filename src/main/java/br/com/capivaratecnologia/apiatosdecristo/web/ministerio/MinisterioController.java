@@ -121,7 +121,7 @@ public class MinisterioController {
     }
 
     //Deletar Voluntario ao Ministerio
-    @DeleteMapping(value = "/volun/{id}")
+    @DeleteMapping(value = "/volun")
     public ResponseEntity deleteVolutarioMinisterio(@PathVariable(value = "id") Long id) {
         final var volun = service.findVoluntarios(id);
 

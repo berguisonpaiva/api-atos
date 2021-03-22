@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface MinVolunRepository extends JpaRepository<MinVolunE,Long> {
     Optional<MinVolunE> findByVoluntarioId(Long voluntario);
+    Optional<MinVolunE> findByMinisterioIdAndVoluntarioId(Long ministerio, Long voluntario);
 
 }

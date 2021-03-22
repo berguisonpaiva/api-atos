@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface EscalaRepository extends JpaRepository<EscalaE,Long> {
     List<EscalaE> findByEventoId(Sort data, Long eventoId);
     Optional<EscalaE> findByEventoIdAndVoluntarioId(Long eventoId, Long volunrioId);
+    List<EscalaE> findByVoluntarioId(Long volunrioId);
 }
